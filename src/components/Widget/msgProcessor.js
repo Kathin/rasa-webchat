@@ -22,7 +22,7 @@ export function isImage(message) {
 }
 
 export function isText(message) {
-  return Object.keys(message).length === 1 && Object.keys(message).includes('text');
+  return Object.keys(message).length === 2 && Object.keys(message).includes('text');
 }
 
 export function isButtons(message) {

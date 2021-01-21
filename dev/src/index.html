@@ -1,67 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Botfront - Web Chat</title>
+<meta charset="utf-8">
+<title>Sales Bot Demo</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<body style="background: lightcyan;">
-<!-- <body style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/4/42/Main_menu_of_Wikipedia.png);"> -->
-  <a href="#" onclick="WebChat.send('/chitchat.greet')">Send chitchat.greet without text</a>
-  <br />
-  <a href="#" onclick="WebChat.send('/chitchat.greet', 'salut')">Send chitchat.greet with text</a>
-  <span style="height: 400px; display: block;">test</span>
-  <span style="height: 400px; display: block;">test</span>
-  <span style="height: 400px; display: block;">test</span>
-  <h1 class="test"> test</h1>
-  <button class="my-button" style="margin: 3em;"> MY BUTTON</button>
-  <div style="width: 900px; height: 900px; border: 3px solid lightsalmon; margin-left: 200px" id="webchat" />
-  <script src="index.js"  type="text/javascript"></script>
+<body>
+<h1>Sales Bot Demo</h1>
+<div id="webchat"></div>
+<!-- script src="https://bot-demo.cti.ru/index.min.js"></script -->
+<!-- script src="https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.min.js"></script -->
+<script src="index.js"  type="text/javascript"></script>
 <script>
-  WebChat.default.init({
-    // embedded: true,
-    selector: "#webchat",
-    initPayload: "/intro_registered_accounts",
-    socketUrl: "http://localhost:5005/",
-    tooltipPayload: "/tooltip_registered_accounts",
-    tooltipDelay: 40000,
-    socketPath: "/socket.io/",
-    customData: {
-      language: 'fr'
-    },
-    subtitle: 'A',
-    inputTextFieldHint: "Type a message...",
-    connectingText: "Waiting for server...",
-    // profileAvatar: "https://storage.googleapis.com/dev-media-store-botfront-cloud/logo_square_circle_white_bg256.jpg",
-    hideWhenNotConnected: false,
-  //   defaultHighlightAnimation: `@-webkit-keyframes default-botfront-blinker-animation {
-  //     from {
-  //     outline: solid rgba(255,0,0,0);
-  //   }
-  //   to {
-  //     outline: solid red;
-  //   }
-  // }`,
-    onSocketEvent: {
-      'bot_uttered': () => console.log('bot uttered'),
-    },
-    showCloseButton: true,
-    fullScreenMode: true,
-    showFullScreenButton: true,
-    docViewer: false,
-    params: {
-      images: {
-        dims: {
-          width: 300,
-          height: 200
-        }
-      },
-      storage: "local"
-    },
-    mainColor: "#32a852",
-    userBackgroundColor: "#24753a",
-    userTextColor: "#cad9ce",
-  })
+    WebChat.default.init({
+        selector: "#webchat",
+        initPayload: "/greet",
+        customData: {"language": "ru"}, // arbitrary custom data. Stay minimal as this will be added to the socket
+        socketUrl: "https://bot-demo.cti.ru",
+        socketPath: "/socket.io/",
+        title: "Sales Bot",
+        subtitle: "Бот по продажам",
+        inputTextFieldHint: "Введите сообщение...",
+        connectingText: "Ожидание сервера...",
+        showCloseButton: true,
+        fullScreenMode: true,
+        showFullScreenButton: true,
+        docViewer: false,
+        linksOpenTab: true,
+        profileAvatar: "https://bot-demo.cti.ru/bot_icon.png",
+        params: {"storage": "session"} // can be set to "local"  or "session". details in storage section.
+    })
 </script>
 </body>
-
 </html>
