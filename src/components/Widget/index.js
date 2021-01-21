@@ -234,10 +234,10 @@ class Widget extends Component {
     this.clearCustomStyle();
     this.eventListenerCleaner();
     dispatch(clearMetadata());
-    if (botUtterance.metadata) this.propagateMetadata(botUtterance.metadata);
-    const newMessage = { ...botUtterance, text: String(botUtterance.text) };
-    if (botUtterance.metadata && botUtterance.metadata.customCss) {
-      newMessage.customCss = botUtterance.metadata.customCss;
+    if (botUtterance[0].metadata) this.propagateMetadata(botUtterance[0].metadata);
+    const newMessage = { ...botUtterance[0], text: String(botUtterance[0].text) };
+    if (botUtterance[0].metadata && botUtterance[0].metadata.customCss) {
+      newMessage.customCss = botUtterance[0].metadata.customCss;
     }
     this.handleMessageReceived(newMessage);
   }
@@ -533,7 +533,6 @@ class Widget extends Component {
       return;
     }
     const { customCss, ...messageClean } = message;
-
     if (isText(messageClean)) {
       this.props.dispatch(addResponseMessage(messageClean.text));
     } else if (isButtons(messageClean)) {
